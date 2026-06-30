@@ -25,26 +25,31 @@ An optimized 2D vector graphic simulation developed in C++ using the **Borland G
 
 ## 📂 Codebase Modular Breakdown
 
-- **`drawCar(int x)`**: Accepts a dynamically incremented tracking factor `x` to continually translate the vehicle bounding box across the active coordinate plane while keeping pixel alignment intact.
-- **`drawBackground(int cloudShift)`**: Manages structural background layering sequentially per frame cycle. Alters local horizontal matrices of the clouds using the passed variable `cloudShift` to simulate continuous environment flow.
-- **`main()`**: Spawns a high-resolution workspace window measuring $1800 \times 800$ pixels, controls the animation playback using a 10-pixel stepping loop, and applies a uniform frame delay of 50ms.
+The underlying program logic isolates engine updates from baseline graphics rendering using the following operational blocks:
+
+### 1. `drawCar(int x)`
+Accepts a dynamically incremented tracking factor `x` to continually translate the vehicle bounding box across the active coordinate plane while keeping pixel alignment intact.
+
+### 2. `drawBackground(int cloudShift)`
+Manages structural background layering sequentially per frame cycle:
+- **Static Assets:** Draws background landscape grids, color floods, trees, house architecture, and coordinate-bound geometric figures.
+- **Dynamic Assets:** Alters local horizontal matrices using the passed variable `cloudShift` to simulate a continuous environment flow.
+
+### 3. `main()`
+Acts as the central execution engine:
+- Spawns a high-resolution workspace window measuring $1800 \times 800$ pixels.
+- Controls the animation playback using a custom standard step loop with 10-pixel tracking updates.
+- Holds execution inside an optimal 50ms interval loop to manage system thread usage cleanly, waiting for an active user key interaction to terminate gracefully.
 
 ---
 
-## 🚀 Dev-C++ Compilation Settings
+## 🚀 Compilation Guide (For Dev-C++)
 
-If you are reconstructing this system inside Dev-C++, configure your compiler workspace links manually to support the graphics library:
+If you need to manually recompile the `.cpp` file inside Dev-C++, verify these configuration settings:
 
-1. Open your code inside Dev-C++.
-2. Press `Alt + P` to open **Project Options** $\rightarrow$ Navigate to the **Parameters** tab.
-3. Input the exact library hooks inside your **Linker** command container box:
+1. Open your workspace folder inside Dev-C++.
+2. Go to **Project Options** (or press `Alt + P`) $\rightarrow$ **Parameters**.
+3. Under the **Linker** text zone, ensure your compiler parameters explicitly load the following operational hooks:
    ```text
    -lbgi -lgdi32 -lcomdlg32 -luuid -loleaut32 -lole32
 
-```
-
-4. Save the configuration settings and press `F11` to compile, build, and launch the application engine.
-
-```
-
-```
